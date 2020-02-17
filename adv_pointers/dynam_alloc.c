@@ -1,8 +1,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+double *malloc_double(int size) {
+	double *array = (double *) malloc(size * sizeof(double));
+	return array;
+}
+
 int main() {
+	double *something = malloc_double(5);
+	if(something == NULL) {
+		printf("Failed allocating memory for something\n");
+		return -1;
+	}
+	free(something);
 	int *i = (int *) malloc(1 * sizeof(int));
+	if(i==NULL) {
+		printf("Failed allocating memory for i\n");
+		return -2;
+	}
 	free(i);
 
 	int j;
@@ -22,6 +37,10 @@ int main() {
 	*/
 
 	float *grades = (float *) calloc(4, sizeof(float));
+	if(grades==NULL) {
+		printf("Failed allocating memory for grades\n");
+		return -3;
+	}
 
 	for(j=0; j<4; j++) {
 		printf("%f ", *(grades+j));
